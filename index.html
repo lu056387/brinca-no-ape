@@ -28,7 +28,7 @@
 <div id="notice" class="dialog" role="dialog" aria-modal="true" aria-labelledby="notice-title" hidden><div class="dialogbox"><h2 id="notice-title">Checkout em preparação</h2><p>Esta é uma versão para revisão. O link de compra ainda não foi configurado. Nenhuma cobrança foi iniciada.</p><button class="btn" id="close-notice" type="button">Voltar à página</button></div></div>
 <script>
 // CONFIGURAÇÃO: substitua pelo link HTTPS real do checkout deste produto.
-const LINK_CHECKOUT_KIWIFY = '[LINK_CHECKOUT_KIWIFY]';
+const LINK_CHECKOUT_KIWIFY = 'https://pay.kiwify.com.br/3SxyTjx';
 const notice=document.getElementById('notice');let previousFocus=null;
 function closeNotice(){notice.hidden=true;if(previousFocus)previousFocus.focus()}
 document.getElementById('close-notice').addEventListener('click',closeNotice);
