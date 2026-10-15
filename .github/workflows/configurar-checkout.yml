@@ -1,0 +1,38 @@
+name: Configurar checkout Kiwify
+
+on:
+  push:
+    paths:
+      - '.github/workflows/configurar-checkout.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  configurar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inserir checkout Kiwify
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = "const LINK_CHECKOUT_KIWIFY = '[LINK_CHECKOUT_KIWIFY]';"
+          new = "const LINK_CHECKOUT_KIWIFY = 'https://pay.kiwify.com.br/3SxyTjx';"
+          if old not in s:
+              raise SystemExit('Placeholder do checkout não encontrado; nenhuma alteração feita.')
+          s = s.replace(old, new)
+          p.write_text(s, encoding='utf-8')
+          print('Checkout Kiwify configurado com sucesso.')
+          PY
+      - name: Commit da alteração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Conecta botoes ao checkout Kiwify"
+          git push
