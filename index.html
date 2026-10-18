@@ -34,7 +34,49 @@
   .sticky .btn{flex-shrink:0}
   footer{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
 }
+
+.marketing-consent{position:fixed;bottom:90px;left:16px;right:16px;max-width:570px;margin:auto;padding:20px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 50px #173d4540;z-index:150;font-size:14px}
+.marketing-consent[hidden]{display:none}
+.marketing-consent p{margin-bottom:12px}
+.marketing-actions{display:flex;gap:10px;flex-wrap:wrap}
+.marketing-actions button{min-height:44px;padding:10px 18px;border:1px solid var(--ink);border-radius:10px;cursor:pointer;background:var(--paper);color:var(--ink)}
+.marketing-actions button:last-child{background:var(--ink);color:#fff}
+.privacy-preferences{border:0;background:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font-size:inherit}
+
 </style>
+
+<!-- Meta Pixel: load marketing measurement only after visitor consent. -->
+<script>
+(function(){
+  var key='brinca_marketing_consent_v1', started=false, choice=null;
+  try{choice=localStorage.getItem(key)}catch(e){}
+  function startPixel(){
+    if(started)return;started=true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+    t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1792904275365443');
+    fbq('track','PageView');
+    fbq('track','ViewContent',{content_name:'Brinca no Apê — 24 missões sem telas',content_ids:['brinca-no-ape'],content_type:'product',value:27.90,currency:'BRL'});
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    var banner=document.getElementById('marketing-consent');
+    function choose(value){
+      choice=value;try{localStorage.setItem(key,value)}catch(e){}
+      banner.hidden=true;
+      if(value==='granted'){if(started&&window.fbq)fbq('consent','grant');startPixel()}
+      else if(window.fbq)fbq('consent','revoke');
+    }
+    document.getElementById('marketing-accept').addEventListener('click',function(){choose('granted')});
+    document.getElementById('marketing-reject').addEventListener('click',function(){choose('denied')});
+    document.getElementById('marketing-preferences').addEventListener('click',function(){banner.hidden=false;document.getElementById('marketing-reject').focus()});
+    banner.hidden=choice==='granted'||choice==='denied';
+    if(choice==='granted')startPixel();
+  });
+})();
+</script>
+
 </head>
 <body>
 <a class="skip" href="#principal">Pular para o conteúdo</a>
@@ -51,7 +93,7 @@
 <section class="section wrap" style="padding-top:0"><div class="faq"><div class="eyebrow">Dúvidas frequentes</div><h2>Antes da próxima brincadeira.</h2><details><summary>Por que pagar se existem ideias gratuitas?</summary><p>Você paga pela seleção e organização, com índice, passos, exemplos e adaptações no mesmo material. Existem boas opções gratuitas; a missão de amostra ajuda a decidir se este formato facilita sua rotina.</p></details><details><summary>Preciso imprimir ou comprar materiais?</summary><p>Não precisa imprimir. Oito missões não pedem materiais; outras usam papel e lápis ou objetos domésticos seguros selecionados pelo adulto. Confira a lista antes de escolher. O planner pode ser impresso se preferir.</p></details><details><summary>Serve para qual idade?</summary><p>A referência é 4 a 8 anos, com variações para 4–5 e 6–8. O responsável escolhe e adapta ao conforto, às preferências e às necessidades da criança.</p></details><details><summary>São aulas ou videoaulas?</summary><p>São três PDFs: e-book de 34 páginas, guia rápido de 2 e planner de 4. O kit principal não inclui vídeo, atendimento individual ou material físico.</p></details><details><summary>O kit garante que a criança vai deixar a tela?</summary><p>O material oferece alternativas de brincadeira acompanhada. Não garante adesão, duração da atenção ou redução específica do uso de telas. A criança pode recusar ou querer mudar a proposta.</p></details><details><summary>Como recebo e por quanto tempo posso usar?</summary><p>Após a aprovação do pagamento, o acesso é enviado ao e-mail usado na compra. Você pode baixar os PDFs e guardá-los para uso pessoal e familiar, sem cobrança recorrente. Confira spam e promoções se não localizar a mensagem.</p></details><details><summary>Como funciona o reembolso?</summary><p>Solicite em até 7 dias após receber o acesso. O contato do produtor está no comprovante da compra e o fluxo de solicitação fica disponível pela plataforma. Não é necessário imprimir, completar missões ou provar um resultado.</p></details></div></section>
 <section class="wrap"><div class="last"><div class="eyebrow">Comece com uma escolha pequena</div><h2>Qual das duas ideias<br>vocês vão inventar hoje?</h2><a class="btn checkout" href="[LINK_CHECKOUT_KIWIFY]">Quero o kit por R$ 27,90 <span aria-hidden="true">↗</span></a><p class="fine">24 missões + guia rápido + planner<br>Produto digital · Com acompanhamento de um adulto</p></div></section>
 </main>
-<footer><div class="wrap footgrid"><div><strong>Brinca no Apê</strong><p>Vendedor: [NOME_DO_VENDEDOR]<br>Documento: [DOCUMENTO_DO_VENDEDOR]<br>Endereço: [ENDERECO_DO_VENDEDOR]<br>Suporte: <a href="mailto:cronicasx.oficial@gmail.com">cronicasx.oficial@gmail.com</a></p><p>Conteúdo criado com apoio de IA e revisão editorial. Imagens ilustrativas. Sem teste de eficácia documentado. Sem vínculo com Meta, UNICEF ou outras instituições citadas em materiais de pesquisa.</p></div><div class="legal"><details><summary>Condições de uso e compra</summary><p>Licença pessoal e familiar dos três PDFs descritos. Não há envio físico ou assinatura. Não revenda nem redistribua os arquivos. O acesso é liberado após aprovação do pagamento, conforme as condições apresentadas no checkout. Reembolso integral solicitado em até 7 dias após receber o acesso. Dúvidas: <a href="mailto:cronicasx.oficial@gmail.com">cronicasx.oficial@gmail.com</a>.</p></details><details><summary>Privacidade</summary><p>Esta versão da página não usa formulários, cookies, armazenamento local ou rastreadores. Os dados de pagamento são fornecidos no checkout, sujeito às políticas apresentadas pela Kiwify e pelo vendedor. Parâmetros UTM do link podem acompanhar a navegação ao checkout para identificar a campanha. Se serviços de análise forem adicionados, esta informação e os controles necessários deverão ser atualizados antes do uso.</p></details><p>© 2026 Brinca no Apê. Edição inicial.</p></div></div></footer>
+<footer><div class="wrap footgrid"><div><strong>Brinca no Apê</strong><p>Vendedor: [NOME_DO_VENDEDOR]<br>Documento: [DOCUMENTO_DO_VENDEDOR]<br>Endereço: [ENDERECO_DO_VENDEDOR]<br>Suporte: <a href="mailto:cronicasx.oficial@gmail.com">cronicasx.oficial@gmail.com</a></p><p>Conteúdo criado com apoio de IA e revisão editorial. Imagens ilustrativas. Sem teste de eficácia documentado. Sem vínculo com Meta, UNICEF ou outras instituições citadas em materiais de pesquisa.</p></div><div class="legal"><details><summary>Condições de uso e compra</summary><p>Licença pessoal e familiar dos três PDFs descritos. Não há envio físico ou assinatura. Não revenda nem redistribua os arquivos. O acesso é liberado após aprovação do pagamento, conforme as condições apresentadas no checkout. Reembolso integral solicitado em até 7 dias após receber o acesso. Dúvidas: <a href="mailto:cronicasx.oficial@gmail.com">cronicasx.oficial@gmail.com</a>.</p></details><details><summary>Privacidade</summary><p>Com sua autorização, esta página usa o Pixel da Meta para medir visitas e visualizações do produto e avaliar anúncios. A Meta pode receber informações da navegação, do dispositivo e identificadores de cookies. Sua escolha fica salva neste navegador; você pode recusá-la ou alterá-la em “Preferências de cookies”. Os dados de pagamento são fornecidos no checkout, sujeito às políticas da Kiwify e do vendedor. Parâmetros de campanha do link podem acompanhar a navegação ao checkout. Contato: cronicasx.oficial@gmail.com.</p></details><p><button type="button" id="marketing-preferences" class="privacy-preferences">Preferências de cookies</button></p><p>© 2026 Brinca no Apê. Edição inicial.</p></div></div></footer>
 <div class="sticky"><div><strong>R$ 27,90</strong><span>3 PDFs · pagamento único</span></div><a class="btn" href="#oferta">Conhecer o kit ↗</a></div>
 <div id="notice" class="dialog" role="dialog" aria-modal="true" aria-labelledby="notice-title" hidden><div class="dialogbox"><h2 id="notice-title">Checkout em preparação</h2><p>Esta é uma versão para revisão. O link de compra ainda não foi configurado. Nenhuma cobrança foi iniciada.</p><button class="btn" id="close-notice" type="button">Voltar à página</button></div></div>
 <script>
@@ -66,4 +108,5 @@ let checkout=null;try{const url=new URL(LINK_CHECKOUT_KIWIFY);if(url.protocol===
 if(checkout){const incoming=new URLSearchParams(location.search);['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{const val=incoming.get(k);if(val)checkout.searchParams.set(k,val)});document.querySelectorAll('.checkout').forEach(a=>a.href=checkout.href)}
 document.querySelectorAll('.checkout').forEach(a=>a.addEventListener('click',e=>{if(!checkout){e.preventDefault();previousFocus=a;notice.hidden=false;document.getElementById('close-notice').focus()}}));
 </script>
+<section id="marketing-consent" class="marketing-consent" aria-label="Preferências de privacidade" hidden><p><strong>Privacidade e anúncios</strong><br>Você permite o uso de cookies da Meta para medir visitas e melhorar nossos anúncios? Você pode navegar e comprar mesmo recusando.</p><div class="marketing-actions"><button type="button" id="marketing-reject">Recusar</button><button type="button" id="marketing-accept">Permitir</button></div></section>
 </body></html>
