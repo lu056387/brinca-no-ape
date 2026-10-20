@@ -1,0 +1,40 @@
+name: Install conversion enhancements
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-conversion-enhancements.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject shared conversion assets without touching checkout links
+        shell: python
+        run: |
+          from pathlib import Path
+          pages=[Path('index.html'),Path('en/index.html')]
+          css='<link rel="stylesheet" href="/conversion-enhancements.css">'
+          js='<script src="/conversion-enhancements.js" defer></script>'
+          for p in pages:
+              if not p.exists():
+                  continue
+              s=p.read_text(encoding='utf-8')
+              changed=False
+              if 'conversion-enhancements.css' not in s:
+                  s=s.replace('</head>',css+'\n</head>',1)
+                  changed=True
+              if 'conversion-enhancements.js' not in s:
+                  s=s.replace('</body>',js+'\n</body>',1)
+                  changed=True
+              if changed:
+                  p.write_text(s,encoding='utf-8')
+      - name: Commit page updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html en/index.html
+          git diff --cached --quiet || git commit -m "Apply trust and conversion improvements to sales pages"
+          git push
