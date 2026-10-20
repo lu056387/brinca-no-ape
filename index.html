@@ -112,6 +112,7 @@
 })();
 
 </script>
+<link rel="stylesheet" href="/conversion-enhancements.css">
 </head>
 <body>
 <a class="skip" href="#principal">Pular para o conteúdo</a>
@@ -144,4 +145,5 @@ if(checkout){const incoming=new URLSearchParams(location.search);['utm_source','
 document.querySelectorAll('.checkout').forEach(a=>a.addEventListener('click',e=>{if(!checkout){e.preventDefault();previousFocus=a;notice.hidden=false;document.getElementById('close-notice').focus()}}));
 </script>
 <section id="marketing-consent" class="marketing-consent" aria-label="Preferências de privacidade" hidden><p><strong>Privacidade e anúncios</strong><br>Você permite o uso de cookies da Meta para medir visitas e interações com a oferta e melhorar nossos anúncios? Você pode navegar e comprar mesmo recusando.</p><div class="marketing-actions"><button type="button" id="marketing-reject">Recusar</button><button type="button" id="marketing-accept">Permitir</button></div></section>
+<script src="/conversion-enhancements.js" defer></script>
 </body></html>
