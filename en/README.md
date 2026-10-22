@@ -1,13 +1,45 @@
-# Little Room Adventures / international edition
+# Little Room Adventures — international funnel
 
-Separate `/en/` directory; preserve the Brazilian root `index.html` unchanged.
+The English sales page lives under `/en/`. The Brazilian page, product and campaign are separate.
 
-The paid PDFs are intentionally NOT in this public repository. Only a three-page sample and optimized illustrations are published.
+## Current offer
 
-Commerce is deliberately closed until a separate international product with all seven resources in Letter and A4 is configured. Set `COMMERCE.checkoutUrl` in app.js to the verified Kiwify URL only after checking currency, final price, delivery and conditions. Never use the Brazilian offer as fallback. Remove planned-price / unavailable text only after validation. The verified target price is a business decision of USD 19; do not infer fixed USD pricing from region=intl.
+The Small-Space Play Kit: 36 unique activities for ages 4–8 with a grown-up, in a 44-page main guide, plus six supporting PDF resources. US Letter and A4 contain the same material. Extras reuse or support the 36 activities. Advertised price: USD 19, one-time. Final currency, amount, taxes and terms must be checked at the provider.
 
-Real existing Meta pixel ID 1792904275365443 is reused with separate consent and product content ID. PageView/ViewContent after consent; custom CheckoutButtonClick for an actual destination. Provider must own genuine InitiateCheckout and approved Purchase. Do not fire Purchase on this page or a thank-you-page visit. No CAPI credential is present.
+International checkout: https://pay.kiwify.com/9MM7u2F?region=intl . The Brazilian checkout is never a fallback. Paid files are not stored in this public repository; only a free sample and previews are public.
 
-UTM forwarding: utm_source, utm_medium, utm_campaign, utm_content, utm_term only. No personal fields. Screenshot/viewport QA pending if no browser preview capability is available. CSS covers narrow viewports, reduced motion, keyboard focus, native details and labeled selection.
+The page follows the root shadow/light presentation and provides automatic, light and dark appearance. All four promotional CTAs scroll to `#get-kit`; only the offer's native checkout anchor opens payment. The child footage stays in its original frame, muted, with pause, reduced-motion and data-saving support.
 
-Assets are original and illustrative; bundle preview uses actual PDF covers. No physical item is included. Primary site copy is English. No paid advertising is activated by committing this directory.
+## Measurement
+
+Meta pixel: 1792904275365443; international product ID: little-room-adventures-en-v1. Consent storage: lra_marketing_consent_v1, independent of the Portuguese funnel. PageView and ViewContent only after consent. OfferNavigationClick, OfferViewed, ScrollDepth and CheckoutButtonClick are custom events. No landing-page InitiateCheckout or Purchase. Actual payment approval must own Purchase. No CAPI credentials are present.
+
+Only bounded utm_source, utm_medium, utm_campaign, utm_content and utm_term values are forwarded. The `region=intl` parameter does not itself guarantee USD charging.
+
+## Prepared replacement creative — not published to Meta
+
+Video: little-room-adventures-en-67s.mp4 (67 seconds, 720 × 1280, original framing, English narration with original woman’s opening and closing audio).
+
+Primary text:
+
+The screen switches off. Then comes the question: “What can I do now?”
+
+Have a next idea ready. Little Room Adventures brings together 36 ways to imagine, make and play with children ages 4–8—using no supplies, paper and crayons, or everyday household objects.
+
+Made for small spaces and time with a grown-up. Main guide plus six practical resources, in US Letter and A4. One payment of $19 USD. Explore the kit and try a sample.
+
+Headline: When the screen goes off, have a next idea ready.
+
+Description: 36 ways to create together · Ages 4–8 · $19 USD
+
+CTA: Learn More
+
+Destination: https://brinca-no-ape.vercel.app/en/
+
+Suggested URL parameters: utm_source=facebook&utm_medium=paid_social&utm_campaign=lra_international&utm_content=video_en_67s
+
+Preserve the verified existing international audience, currency, budget and conversion configuration until inspected live. Historical international budget was R$14/day with the user's ceiling R$25/day; this is not a live budget verification. Do not change or reactivate other ads. Sales/Purchase optimization is appropriate only when the actual payment-confirmed Purchase event is correctly received.
+
+## Verification / publishing status
+
+Static HTML IDs, local assets, offer anchors, separate checkout, UTM forwarding, consent-gated pixel and JS syntax are checked locally. Browser visual QA is blocked by the unavailable browser backend. Committing this directory publishes the page through the existing Vercel integration; it does not upload, publish or activate an ad in Meta.
