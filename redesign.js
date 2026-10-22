@@ -1,5 +1,28 @@
 (()=>{
  'use strict';
+ // Follow the device by default; an explicit reader choice also survives reloads.
+ const themePreference=document.getElementById('theme-preference');
+ const systemTheme=matchMedia('(prefers-color-scheme: dark)');
+ function syncTheme(){
+   const preference=document.documentElement.dataset.theme||'auto';
+   const dark=preference==='dark'||(preference==='auto'&&systemTheme.matches);
+   if(themePreference)themePreference.value=preference;
+   const chrome=document.querySelector('meta[name="theme-color"]');
+   if(chrome)chrome.content=dark?'#101c23':'#0a1520';
+ }
+ if(themePreference){
+   themePreference.disabled=false;
+   themePreference.addEventListener('change',()=>{
+     const preference=themePreference.value;
+     if(preference==='auto')delete document.documentElement.dataset.theme;
+     else document.documentElement.dataset.theme=preference;
+     try{if(preference==='auto')localStorage.removeItem('brinca_color_scheme_v1');else localStorage.setItem('brinca_color_scheme_v1',preference)}catch(e){}
+     syncTheme();
+   });
+ }
+ systemTheme.addEventListener('change',syncTheme);
+ syncTheme();
+
  // Preserve the established checkout and campaign parameters.
  const checkout=new URL('https://pay.kiwify.com.br/3SxyTjx');
  const incoming=new URLSearchParams(location.search);
