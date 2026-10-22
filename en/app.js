@@ -1,7 +1,7 @@
 /* Separate international funnel. Purchase is recorded only after payment approval. */
 (()=>{
 'use strict';
-const COMMERCE=Object.freeze({checkoutUrl:'https://pay.kiwify.com/9MM7u2F',pixelId:'1792904275365443',currency:'USD',value:19,productId:'little-room-adventures-en-v1'});
+const COMMERCE=Object.freeze({checkoutUrl:'https://pay.kiwify.com/9MM7u2F',pixelId:'1792904275365443',currency:'USD',value:9.90,productId:'little-room-adventures-en-v1'});
 const KEY='lra_marketing_consent_v1',THEME_KEY='lra_color_scheme_v1';
 const systemTheme=matchMedia('(prefers-color-scheme: dark)'),selector=document.getElementById('theme-preference');
 function syncTheme(){const preference=document.documentElement.dataset.theme||'auto';selector.value=preference;document.querySelector('meta[name="theme-color"]').content=preference==='dark'||(preference==='auto'&&systemTheme.matches)?'#101c23':'#0a1520'}
